@@ -1,7 +1,7 @@
 const DFARulebook = require('./DFARuleBook');
 const FARule = require('./FARule');
-
-
+const DFA = require('./DFA');
+const DFADesign = require('./DFADesign');
 
  function run(){
     let rulebook = new DFARulebook(
@@ -12,7 +12,36 @@ const FARule = require('./FARule');
       ]
     );
     let rule1 = rulebook.nextState(1,'a');
-    console.log(rule1);
+    let rule2 = rulebook.nextState(1,'b');
+    let rule3 = rulebook.nextState(3,'a');
+
+    let accept1 = new DFA(1,[1,3], rulebook).accepting();
+    let accept2 = new DFA(14,[1,3], rulebook).accepting();
+
+    let dfa = new DFA(1,[3], rulebook);
+    let accept3 = dfa.accepting();
+    dfa.read_character('b');
+    let accept4 = dfa.accepting();
+
+    for(let i=0; i< 3; i++){
+      dfa.read_character('a');
+    }
+    let accept5 = dfa.accepting();
+    dfa.read_character('b');
+    let accept6 = dfa.accepting();
+
+
+    dfa = new DFA(1, [3], rulebook);
+    dfa.read_string('baaab');
+    let accept7 = dfa.accepting();
+
+    dfa_design = new DFADesign(1,[3],rulebook);
+    let accept8 = dfa_design.accepts('a');
+    let accept9 = dfa_design.accepts('baaab');
+    let accept10 = dfa_design.accepts('baba');
+
+
+    console.log(accept10);
 
   }
 
