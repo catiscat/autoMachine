@@ -2,8 +2,10 @@ const DFARulebook = require('./DFARuleBook');
 const FARule = require('./FARule');
 const DFA = require('./DFA');
 const DFADesign = require('./DFADesign');
+const NFARulebook = require('./NFARulebook');
 
  function run(){
+   //dfa
     let rulebook = new DFARulebook(
       [
         new FARule(1,'a',2), new FARule(1,'b',1),
@@ -41,7 +43,16 @@ const DFADesign = require('./DFADesign');
     let accept10 = dfa_design.accepts('baba');
 
 
-    console.log(accept10);
+    //nfa
+    rulebook = new NFARulebook([
+      new FARule(1,'a',1), new FARule(1,'b',1), new FARule(1,'b',2),
+      new FARule(2,'a',3), new FARule(2,'b',3),
+      new FARule(3,'a',4), new FARule(3,'b',4)
+    ]);
+
+    let nextstates = rulebook.next_states(new Set([1]),'b');
+
+    console.log(nextstates);
 
   }
 
