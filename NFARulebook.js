@@ -26,4 +26,15 @@ module.exports = class NFARulebook{
     });
   }
 
+  follow_free_moves(states){
+    let more_states = this.next_states(states, null);
+    let difference = new Set(
+      [...more_states].filter(x => !states.has(x)));
+    if(difference.size<1){
+      return states;
+    }else{
+      return this.follow_free_moves(new Set([...states,...more_states]));
+    }
+  }
+
 }

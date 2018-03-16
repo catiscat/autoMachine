@@ -47,15 +47,15 @@ const NFADesign = require('./NFADesign');
 
 
     //nfa
-    rulebook = new NFARulebook([
-      new FARule(1,'a',1), new FARule(1,'b',1), new FARule(1,'b',2),
-      new FARule(2,'a',3), new FARule(2,'b',3),
-      new FARule(3,'a',4), new FARule(3,'b',4)
-    ]);
+    // rulebook = new NFARulebook([
+    //   new FARule(1,'a',1), new FARule(1,'b',1), new FARule(1,'b',2),
+    //   new FARule(2,'a',3), new FARule(2,'b',3),
+    //   new FARule(3,'a',4), new FARule(3,'b',4)
+    // ]);
 
-    let nextstates = rulebook.next_states(new Set([1]),'b');
-    nextstates = rulebook.next_states(new Set([1,2]), 'a');
-    nextstates = rulebook.next_states(new Set([1,3]), 'b');
+    // let nextstates = rulebook.next_states(new Set([1]),'b');
+    // nextstates = rulebook.next_states(new Set([1,2]), 'a');
+    // nextstates = rulebook.next_states(new Set([1,3]), 'b');
 
     // nfa = new NFA(new Set([1]), new Set([4]), rulebook);
     // let accept = nfa.accepting();
@@ -65,12 +65,36 @@ const NFADesign = require('./NFADesign');
     // nfa.read_string('bbbb');
     // accept = nfa.accepting();
 
-    nfa_design = new NFADesign(1, new Set([4]), rulebook);
-    accept = nfa_design.accepts('bab');
+    // nfa_design = new NFADesign(1, new Set([4]), rulebook);
+    // accept = nfa_design.accepts('bab');
 
-    accept = nfa_design.accepts('bbabb')
+    // accept = nfa_design.accepts('bbabb')
+    // console.log(accept);
+
+    rulebook = new NFARulebook([
+      new FARule(1, null, 2), new FARule(1, null, 4),
+      new FARule(2,'a', 3),
+      new FARule(3,'a', 2),
+      new FARule(4,'a', 5),
+      new FARule(5,'a', 6),
+      new FARule(6,'a', 4)
+    ]);
+
+    // nextstates = rulebook.next_states(new Set([1]), null);
+    // nextstates = rulebook.follow_free_moves(new Set([1]));
+    // console.log(nextstates);
+
+    nfa_design = new NFADesign(1,new Set([2,4]), rulebook);
+    // states = rulebook.next_states(new Set([1]), null);
+    // states = rulebook.next_states(new Set([2,4]), 'a');
+    // states = rulebook.next_states(new Set([3,5]), 'a');
+
+    // [1,2,4] 1-> null, 2->2, 4->6 [null,2,6],
+    accept = nfa_design.accepts('aa');
+    accept = nfa_design.accepts('aaaaaa');
+
     console.log(accept);
-
+    // accept = nfa_design.accepts('')
 
   }
 

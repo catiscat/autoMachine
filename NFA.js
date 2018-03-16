@@ -17,8 +17,15 @@ module.exports = class NFA{
   }
 
   read_string(string){
+    // before read_string, you should update current states
+    this.update_current_states();
     for(let i=0; i< string.length; i++){
       this.read_character(string[i]);
     }
+  }
+
+  update_current_states(){
+    this.current_states = this.rulebook.follow_free_moves(this.current_states);
+    return this.current_states;
   }
 }
