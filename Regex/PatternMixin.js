@@ -8,6 +8,10 @@
     }
   },
 
+  matches(string){
+    return this.to_nfa_design().accepts(string);
+  },
+
   inspect(){
     console.log(`\/${this.to_string()}\/`);
   }

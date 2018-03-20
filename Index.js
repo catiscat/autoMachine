@@ -6,13 +6,16 @@ const DFADesign = require('./DFADesign');
 const NFARulebook = require('./NFARulebook');
 const NFA = require('./NFA');
 const NFADesign = require('./NFADesign');
+
 const Repeat = require('./Regex/Repeat');
 const Choose = require('./Regex/Choose');
 const Concatenate = require('./Regex/Concatenate');
 const Literal = require('./Regex/Literal');
+const Empty = require('./Regex/Empty');
 
 
  function run(){
+   /*
    //dfa
     let rulebook = new DFARulebook(
       [
@@ -99,7 +102,8 @@ const Literal = require('./Regex/Literal');
 
     // console.log(accept);
     // accept = nfa_design.accepts('')
-
+*/
+    //Regex
     var pattern = new Repeat(
       new Choose(
         new Concatenate(new Literal('a'), new Literal('b')),
@@ -107,7 +111,27 @@ const Literal = require('./Regex/Literal');
       )
     );
 
-    console.log(pattern);
+    // nfa_design = new Empty().to_nfa_design();
+    // accept = nfa_design.accepts('');
+
+    // nfa_design = new Literal('a').to_nfa_design();
+    // accept = nfa_design.accepts('b');
+
+    // accept = new Empty().matches('');
+    // accept = new Literal('a').matches('a');
+
+    pattern = new Concatenate(
+      new Concatenate(
+        new Literal('a'),
+        new Literal('b')
+      ),
+      new Literal('c')
+    );
+
+    accept = pattern.matches('abc');
+    console.log(accept);
+
+
   }
 
 

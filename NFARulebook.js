@@ -1,28 +1,29 @@
 module.exports = class NFARulebook{
   constructor(rules){
-    this.rules = rules;
+    this.rules = rules || [];
   }
   //use set to avoide repeated states
   next_states(states, character){
      let statesList = [];
      states.forEach((state)=>{
-      statesList = [...statesList, ...this.follow_rules_for(state, character)];
+      statesList = statesList.concat(this.follow_rules_for(state, character) );
     });
     return new Set(statesList);
   }
 
   //get every single next state
   follow_rules_for(state, character){
-    const rules = this.rules_for(state, character);
-    return rules.map((rule)=>{
+    const rules = this.rules_for(state, character) || [];
+    const follow_rules = rules.map((rule)=>{
       return rule.follow();
     });
+    return follow_rules;
   }
 
   //return rules that matches the given state & character
   rules_for(state, character){
     return this.rules.filter((rule)=>{
-      return rule.applies_to(state, character);
+      return rule && rule.applies_to(state, character);
     });
   }
 

@@ -6,7 +6,7 @@ module.exports = class FARule {
   }
 
   applies_to(state, character){
-    return this.state == state && this.character == character;
+    return JSON.stringify(this.state) == JSON.stringify(state) && this.character == character;
   }
 
   follow(){
