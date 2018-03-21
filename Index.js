@@ -129,6 +129,14 @@ const Empty = require('./Regex/Empty');
     );
 
     accept = pattern.matches('abc');
+
+    pattern = new Choose(
+      new Literal('a'),
+      new Literal('b')
+    );
+
+    accept = pattern.matches('aba');
+
     console.log(accept);
 
 
